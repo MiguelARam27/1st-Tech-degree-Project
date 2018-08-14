@@ -86,7 +86,7 @@ getRandomColor();
 }
 
 function getRandomColor() {
-  //code i googled and got from stackexchange
+  //random color code i googled and got info from stackexchange
   var letters = '0123456789ABCDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
