@@ -43,7 +43,8 @@ var quotes = [
 // Create the getRandomQuuote function and name it getRandomQuote
 function getRandomQuote(array){
   var randomNumber =Math.floor(Math.random()*array.length);
-  return randomNumber;
+  //return randomNumber;
+  return array[randomNumber].quote;
   //returns the index of the quote
 };
 
@@ -69,16 +70,35 @@ function keyCheck(index){
 // Create the printQuote funtion and name it printQuote
 function printQuote(){
   var quote = getRandomQuote(quotes);
-  keyCheck(quote);
+  var index;
+  //loop to see in which object the quotes object came from in order to get
+  //the rest of the object properties such as source, year etc. 
+  for(var i =0;i<5;i++){
+    if(quotes[i].quote === quote){
+      index = i;
+  }
+  }
+  keyCheck(index);
   var stringOfQuoteProperties;
     if(isCitation === true && isYear === true){
-      stringOfQuoteProperties = "<p class=\"quote\">"+quotes[quote].quote+ "</p> <p class=\"source\">"+ quotes[quote].source +"<span class=\"citation\">" +quotes[quote].citation+ "</span><span class=\"year\">"+quotes[quote].year+ "</span></p>";
+      stringOfQuoteProperties = "<p class=\"quote\">"+quotes[index].quote+
+        "</p> <p class=\"source\">"+ quotes[index].source +
+          "<span class=\"citation\">" +quotes[index].citation+
+            "</span><span class=\"year\">"+quotes[index].year+ "</span></p>";
     }else if (isCitation === true && isYear === false) {
-     stringOfQuoteProperties = "<p class=\"quote\">"+quotes[quote].quote+ "</p> <p class=\"source\">"+ quotes[quote].source +"<span class=\"citation\">" +quotes[quote].citation+ "</p>";
+     stringOfQuoteProperties = "<p class=\"quote\">"+
+      quotes[index].quote+ "</p> <p class=\"source\">"+
+        quotes[index].source +"<span class=\"citation\">" +
+            quotes[index].citation+ "</p>";
     } else if (isCitation===false && isYear===true) {
-     stringOfQuoteProperties = "<p class=\"quote\">"+quotes[quote].quote+ "</p> <p class=\"source\">"+ quotes[quote].source +"<span class=\"year\">" +quotes[quote].year+ "</p>";
+     stringOfQuoteProperties = "<p class=\"quote\">"+
+      quotes[index].quote+ "</p> <p class=\"source\">"+
+        quotes[index].source +"<span class=\"year\">" +
+          quotes[index].year+ "</p>";
     } else{
-     stringOfQuoteProperties = "<p class=\"quote\">"+quotes[quote].quote+ "</p> <p class=\"source\">"+quotes[quote].source+"</p>";
+     stringOfQuoteProperties = "<p class=\"quote\">"+
+      quotes[index].quote+ "</p> <p class=\"source\">"+
+        quotes[index].source+"</p>";
 }
 
 document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
