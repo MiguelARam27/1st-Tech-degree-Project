@@ -44,8 +44,9 @@ var quotes = [
 function getRandomQuote(array){
   var randomNumber =Math.floor(Math.random()*array.length);
   //return randomNumber;
+  //above is what i had before, where it just returned a randomNumber
+  // below it should return an object
   return array[randomNumber].quote;
-  //returns the index of the quote
 };
 
 //global variables that will be boolean
@@ -71,31 +72,38 @@ function keyCheck(index){
 function printQuote(){
   var quote = getRandomQuote(quotes);
   var index;
-  //loop to see in which object the quotes object came from in order to get
-  //the rest of the object properties such as source, year etc. 
+  //loop to see in which index of the array the quotes object came from in order to get
+  //the rest of the object properties such as source, year etc.
   for(var i =0;i<5;i++){
-    if(quotes[i].quote === quote){
+    if(quotes[i].quote === quote)
+    {
       index = i;
+    }
   }
-  }
+
   keyCheck(index);
   var stringOfQuoteProperties;
     if(isCitation === true && isYear === true){
+      //if the object has a citation and a year property then print this
       stringOfQuoteProperties = "<p class=\"quote\">"+quotes[index].quote+
         "</p> <p class=\"source\">"+ quotes[index].source +
           "<span class=\"citation\">" +quotes[index].citation+
             "</span><span class=\"year\">"+quotes[index].year+ "</span></p>";
     }else if (isCitation === true && isYear === false) {
+      //if the object has a citation but doesn't have a  year property then print this
      stringOfQuoteProperties = "<p class=\"quote\">"+
       quotes[index].quote+ "</p> <p class=\"source\">"+
         quotes[index].source +"<span class=\"citation\">" +
             quotes[index].citation+ "</p>";
     } else if (isCitation===false && isYear===true) {
+      //if the object doesn't have a citation, but has a year then print this
      stringOfQuoteProperties = "<p class=\"quote\">"+
       quotes[index].quote+ "</p> <p class=\"source\">"+
         quotes[index].source +"<span class=\"year\">" +
           quotes[index].year+ "</p>";
     } else{
+      //below is when the object doesn't contain a citation or a year
+      // which we print the normal required portion with only quote and source
      stringOfQuoteProperties = "<p class=\"quote\">"+
       quotes[index].quote+ "</p> <p class=\"source\">"+
         quotes[index].source+"</p>";
